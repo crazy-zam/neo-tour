@@ -1,0 +1,33 @@
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.oneSymbol {
+  margin: 0;
+  padding: 0 1px;
+  width: 1ch;
+  height: 2rem;
+  caret-color: transparent;
+  color: rgba(20, 20, 20, 1);
+  border: none;
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+}
+.oneSymbol:focus {
+  outline: none;
+}
+.oneSymbol::selection {
+  color: rgb(50, 42, 158);
+}
+.oneSymbolMask {
+  margin: 0;
+  padding: 0;
+  height: 2rem;
+  color: rgba(136, 136, 136, 1);
+}

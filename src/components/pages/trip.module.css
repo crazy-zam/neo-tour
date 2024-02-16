@@ -1,0 +1,114 @@
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+.page {
+  font-family: 'Satoshi', sans-serif;
+}
+.header {
+  width: 100%;
+}
+.headerImg {
+  width: 100%;
+  height: 50vh;
+  overflow: visible;
+
+  object-fit: cover;
+  position: relative;
+}
+
+.headerBtn {
+  position: absolute;
+  top: 150px;
+  left: 150px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 28px;
+  width: 200px;
+  height: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.body {
+  position: absolute;
+  width: 100%;
+  height: max(max-content, 50vh);
+  border: none;
+  border-radius: 48px 48px 0 0;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bodyTitle {
+  margin: 50px 0 20px;
+  font-weight: 900;
+  font-size: 64px;
+  width: 80vw;
+  text-align: start;
+}
+.location {
+  font-weight: 500;
+  font-size: 16px;
+  width: 80vw;
+  text-align: start;
+}
+
+.bodyDescription {
+  font-weight: 400;
+  font-size: 18px;
+  width: 80vw;
+  text-align: start;
+}
+.bodyDescriptionLabel {
+  margin: 50px 0 20px;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.reviews {
+  width: 80vw;
+  text-align: start;
+}
+.reviewHead {
+  display: flex;
+}
+.reviewImg {
+  height: 24px;
+  width: 24px;
+  border: none;
+  border-radius: 12px;
+  margin: 0 10px 0 0;
+}
+.reviewsTitle {
+  margin: 50px 0 20px;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.reviewPerson {
+  margin: 0 0 20px;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.reviewTxt {
+  margin: 0 0 20px;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.bookBtn {
+  width: min(1200px, 60vw);
+  height: 40px;
+  background-color: rgba(106, 98, 183, 1);
+  border: none;
+  border-radius: 50px;
+  font-weight: 400;
+  font-size: 24px;
+  color: white;
+  margin: 20px 0 50px;
+  cursor: pointer;
+}

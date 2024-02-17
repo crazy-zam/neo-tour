@@ -6,6 +6,7 @@ import CustomInput from './CustomInput';
 import flagRU from './../../assets/ru flag.svg';
 import flagKZ from './../../assets/kz flag.svg';
 import flagKG from './../../assets/kg flag.svg';
+import arrowDown from './../../assets/arrow down.svg';
 
 const ModalForm = ({ setModal }) => {
   const [peopleCount, setPeopleCount] = useState(1);
@@ -61,6 +62,7 @@ const ModalForm = ({ setModal }) => {
                         alt=""
                         className={styles.optionFlag}
                       />
+                      <img src={arrowDown} alt="" />
                       <div className={styles.optionText}>
                         {`+ ${masks[item].prefix}`}
                       </div>
@@ -84,6 +86,7 @@ const ModalForm = ({ setModal }) => {
                     alt=""
                     className={styles.optionFlag}
                   />
+                  <img src={arrowDown} alt="" />
                   <div className={styles.optionText}>{`+ ${
                     masks[selectFlag.selected].prefix
                   }`}</div>

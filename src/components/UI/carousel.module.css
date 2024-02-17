@@ -25,7 +25,7 @@
   border: none;
   border-radius: 20px;
   background-color: aqua;
-
+  cursor: pointer;
   overflow: hidden;
   margin: 20px;
   /* width: 384x; */

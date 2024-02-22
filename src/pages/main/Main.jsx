@@ -197,6 +197,7 @@ const Main = () => {
           })}
         </div>
       </div>
+      <Link to={'/admin'}>admin panel</Link>
     </div>
   );
 };

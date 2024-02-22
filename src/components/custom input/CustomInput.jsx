@@ -83,6 +83,7 @@ const CustomInput = ({ mask, placeholder, phone, setPhone }) => {
         obj.type == 'input' ? (
           <input
             key={i}
+            autocomplete="off"
             name="sumbol"
             className={styles.oneSymbol}
             value={obj.value}

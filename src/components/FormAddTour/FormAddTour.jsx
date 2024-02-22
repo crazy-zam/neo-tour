@@ -1,14 +1,14 @@
 import { Formik } from 'formik';
 import axios from 'axios';
 
-const API = process.env.API_URL;
+const API = 'http://http://134.209.229.107:8080';
 
-// const headersJSON = {
-//   'Content-Type': 'application/json',
-// };
-// const headersEncrypted = {
-//   'Content-Type': 'multipart/encrypted',
-// };
+const headersJSON = {
+  'Content-Type': 'application/json',
+};
+const headersEncrypted = {
+  'Content-Type': 'multipart/encrypted',
+};
 export const addTour = async (data, head) => {
   try {
     const response = await axios.post(`${API}/api/v1/admin/tour`, data, {
@@ -49,14 +49,14 @@ const FormAddTour = () => {
             formDataJSON.append(key, val);
           });
 
-          for (var pair of formDataJSON.entries()) {
-            console.log(pair[0] + ', ' + pair[1]);
-          }
-          for (var pair of formDataFile.entries()) {
-            console.log(pair[1]);
-          }
-          //  addTour(formDataJSON, headersJSON);
-          //  addTour(formDataFile, headersEncrypted);
+          // for (var pair of formDataJSON.entries()) {
+          //   console.log(pair[0] + ', ' + pair[1]);
+          // }
+          // for (var pair of formDataFile.entries()) {
+          //   console.log(pair[1]);
+          // }
+          addTour(formDataJSON, headersJSON);
+          addTour(formDataFile, headersEncrypted);
 
           actions.setSubmitting(false);
         }}

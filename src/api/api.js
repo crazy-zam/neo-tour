@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API = process.env.API_URL;
+const API = 'http://http://134.209.229.107:8080';
 
 export const getRecommendTours = async () => {
   try {

@@ -23,7 +23,14 @@ const ModalForm = ({ setModal }) => {
     select: false,
     selected: 'KZ',
   });
-
+  const phoneParser = () => {
+    let res = '';
+    res = res.concat(masks[selectFlag.selected].prefix);
+    phone.forEach((digit) => {
+      res = res.concat(digit.value);
+    });
+    return res;
+  };
   return (
     <div
       className={styles.background}
@@ -107,6 +114,7 @@ const ModalForm = ({ setModal }) => {
         <div className={styles.helper}>Commentaries to trip</div>
         <input
           className={styles.commentaries}
+          autocomplete="off"
           type="text"
           name="commentaries"
           placeholder="Write your wishes to trip..."
@@ -147,7 +155,8 @@ const ModalForm = ({ setModal }) => {
             )
           }
           onClick={() => {
-            setModal('Your Trip has been booked!');
+            // setModal('Your Trip has been booked!');
+            console.log(phoneParser());
           }}
         >
           Submit

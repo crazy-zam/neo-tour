@@ -1,35 +1,36 @@
 import { logo, arrow, arrowLeft, arrowRigth, dot } from './../../assets/index';
 import styles from './main.module.css';
-import Carousel from '../../components/carousel/Carousel';
+
 import {
   recommended,
   discoverPopular,
   discoverFuture,
 } from '../../helpers/rest';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-
+import { getRecommendTours, getDiscoverTours } from '../../api/api';
 const Main = () => {
   const swiperRef = useRef();
   const tabs = ['Popular', 'Featured', 'Most Visited', 'Europe', 'Asia'];
   const [activeTab, setActiveTab] = useState('Popular');
-  const [offset, setOffset] = useState(0);
-  const PAGE_WIDTH = 424;
-  const handleLeftArrowClick = () => {
-    setOffset((currentOffset) => Math.min(currentOffset + PAGE_WIDTH, 0));
-  };
-  const handleRightArrowClick = () => {
-    setOffset((currentOffset) =>
-      Math.max(
-        currentOffset - PAGE_WIDTH,
-        -(PAGE_WIDTH * (discoverPopular.length - 3)),
-      ),
-    );
-  };
-
+  const [activeTabTours, setActiveTabTours] = useState([]);
+  useEffect(() => {
+    async function fetch() {
+      const tours = getDiscoverTours(tabs.indexOf(activeTab) + 1);
+      setActiveTabTours(tours);
+    }
+    fetch();
+  }, []);
+  // useEffect(() => {
+  //   async function fetch() {
+  //     const tours = getDiscoverTours(tabs.indexOf(activeTab));
+  //     setActiveTabTours(tours);
+  //   }
+  //   fetch();
+  // }, [activeTab]);
   return (
     <div className={styles.main}>
       <div className={styles.header}>
@@ -79,18 +80,6 @@ const Main = () => {
                 className={styles.discoverArrowImg}
               />
             </button>
-            {/* <button
-              className={styles.discoverArrow}
-              onClick={handleLeftArrowClick}
-            >
-              <img src={arrowLeft} alt="" />
-            </button>
-            <button
-              className={styles.discoverArrow}
-              onClick={handleRightArrowClick}
-            >
-              <img src={arrowRigth} alt="" />
-            </button> */}
           </div>
         </div>
         <div className={styles.discoverNavigate}>
@@ -107,7 +96,6 @@ const Main = () => {
                     if (event.target.className.includes('Active')) return;
 
                     setActiveTab(tab);
-                    setOffset(0);
                   }}
                 >
                   {tab}
@@ -137,7 +125,7 @@ const Main = () => {
               },
             }}
           >
-            {discoverPopular.map((item) => (
+            {activeTabTours.map((item) => (
               <SwiperSlide key={item.id}>
                 <div className={styles.discoverItemWrap}>
                   <Link

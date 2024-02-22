@@ -3,17 +3,16 @@ import axios from 'axios';
 
 const API = 'http://http://134.209.229.107:8080';
 
-const headersJSON = {
-  'Content-Type': 'application/json',
+const headers = {
+  'Content-Type': 'multipart/form-data',
 };
-const headersEncrypted = {
-  'Content-Type': 'multipart/encrypted',
-};
+
 export const addTour = async (data, head) => {
   try {
     const response = await axios.post(`${API}/api/v1/admin/tour`, data, {
       headers: head,
     });
+    console.log(response);
     return response;
   } catch (error) {
     console.log(error);
@@ -34,29 +33,33 @@ const FormAddTour = () => {
           month: [],
           file: '',
         }}
-        onSubmit={(values, actions) => {
-          const formDataJSON = new FormData();
-          const formDataFile = new FormData();
+        onSubmit={async (values, actions) => {
+          const formData = new FormData();
+          const obj = {};
+          let file;
           Object.entries(values).forEach(([key, val]) => {
             if (key === 'file') {
-              formDataFile.append('file', val, val.name);
+              file = val;
               return;
             }
             if (key === 'month') {
-              formDataJSON.append(key, val.split(/\s+/));
+              obj[key] = val.split(/\s+/);
               return;
             }
-            formDataJSON.append(key, val);
+            obj[key] = val;
           });
-
-          // for (var pair of formDataJSON.entries()) {
-          //   console.log(pair[0] + ', ' + pair[1]);
-          // }
-          // for (var pair of formDataFile.entries()) {
-          //   console.log(pair[1]);
-          // }
-          addTour(formDataJSON, headersJSON);
-          addTour(formDataFile, headersEncrypted);
+          const json = ` {
+          "title": "${obj.title}",
+          "country": "${obj.country}",
+          "tourLocation": "${obj.tourLocation}",
+          "description": "${obj.description}",
+          "category": ${obj.category},
+          "month": [${obj.month}]
+        }`;
+          formData.append('request', json);
+          formData.append('file', file, file.name);
+          console.log(json);
+          // await addTour(formData, headers);
 
           actions.setSubmitting(false);
         }}
@@ -70,11 +73,11 @@ const FormAddTour = () => {
               name="category"
             >
               <option value="" label="Select a category"></option>
-              <option value="0" label="Popular"></option>
-              <option value="1" label=" Featured"></option>
-              <option value="2" label="Most Visited"></option>
-              <option value="3" label="Europe"></option>
-              <option value="4" label="Asia"></option>
+              <option value="1" label="Popular"></option>
+              <option value="2" label=" Featured"></option>
+              <option value="3" label="Most Visited"></option>
+              <option value="4" label="Europe"></option>
+              <option value="5" label="Asia"></option>
             </select>
             <div>country</div>
             <input

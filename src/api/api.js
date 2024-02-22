@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API = 'http://http://134.209.229.107:8080';
+const API = 'http://134.209.229.107:8080';
 
 export const getRecommendTours = async () => {
   try {
@@ -12,7 +12,7 @@ export const getRecommendTours = async () => {
 
 export const getDiscoverTours = async (id) => {
   try {
-    const response = await axios.get(`${API}/api/v1/tour/bycategory/:${id}`);
+    const response = await axios.get(`${API}/api/v1/tour/bycategory/${id}`);
     return response;
   } catch (error) {
     console.log(error);
@@ -20,7 +20,7 @@ export const getDiscoverTours = async (id) => {
 };
 export const getTourbyId = async (id) => {
   try {
-    const response = await axios.get(`${API}/api/v1/tour/:${id}`);
+    const response = await axios.get(`${API}/api/v1/tour/${id}`);
     return response;
   } catch (error) {
     console.log(error);

@@ -1,19 +1,19 @@
-import logo from './../../assets/main logo.png';
-import arrow from './../../assets/Arrow 1.svg';
-import arrowLeft from './../../assets/arrow left.svg';
-import arrowRigth from './../../assets/arrow right.svg';
-import dot from './../../assets/dot.png';
+import { logo, arrow, arrowLeft, arrowRigth, dot } from './../../assets/index';
 import styles from './main.module.css';
-import Carousel from '../UI/Carousel';
+import Carousel from '../../components/carousel/Carousel';
 import {
   recommended,
   discoverPopular,
   discoverFuture,
-} from './../../helpers/rest';
+} from '../../helpers/rest';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useRef } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 const Main = () => {
+  const swiperRef = useRef();
   const tabs = ['Popular', 'Featured', 'Most Visited', 'Europe', 'Asia'];
   const [activeTab, setActiveTab] = useState('Popular');
   const [offset, setOffset] = useState(0);
@@ -29,7 +29,6 @@ const Main = () => {
       ),
     );
   };
-  const navigate = useNavigate();
 
   return (
     <div className={styles.main}>
@@ -62,6 +61,26 @@ const Main = () => {
           <div className={styles.discoverArrows}>
             <button
               className={styles.discoverArrow}
+              onClick={() => swiperRef.current.slidePrev()}
+            >
+              <img
+                src={arrowLeft}
+                alt="swipe forward"
+                className={styles.discoverArrowImg}
+              />
+            </button>
+            <button
+              className={styles.discoverArrow}
+              onClick={() => swiperRef.current.slideNext()}
+            >
+              <img
+                src={arrowRigth}
+                alt="swipe backward"
+                className={styles.discoverArrowImg}
+              />
+            </button>
+            {/* <button
+              className={styles.discoverArrow}
               onClick={handleLeftArrowClick}
             >
               <img src={arrowLeft} alt="" />
@@ -71,7 +90,7 @@ const Main = () => {
               onClick={handleRightArrowClick}
             >
               <img src={arrowRigth} alt="" />
-            </button>
+            </button> */}
           </div>
         </div>
         <div className={styles.discoverNavigate}>
@@ -98,23 +117,72 @@ const Main = () => {
             );
           })}
         </div>
-        <Carousel
+        <div className={styles.swiperContainer}>
+          <Swiper
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            className="mySwiper"
+            slidesPerView={1}
+            spaceBetween={10}
+            breakpointsBase={'container'}
+            breakpoints={{
+              800: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              1200: {
+                slidesPerView: 3,
+                spaceBetween: 40,
+              },
+            }}
+          >
+            {discoverPopular.map((item) => (
+              <SwiperSlide key={item.id}>
+                <div className={styles.discoverItemWrap}>
+                  <Link
+                    className={styles.discoverItem}
+                    to={`/trips/${item.id}`}
+                    onClick={() => {
+                      window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: 'smooth',
+                      });
+                    }}
+                  >
+                    <img
+                      src={item.image}
+                      alt=""
+                      className={styles.discoverItemImg}
+                    />
+                    <div className={styles.discoverItemTxt}>
+                      {item.location}
+                    </div>
+                  </Link>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+
+        {/* <Carousel
           className={styles.discoverCarousel}
           pageWidth={PAGE_WIDTH}
           offset={offset}
           discover={activeTab == 'Popular' ? discoverPopular : discoverFuture}
-        ></Carousel>
+        ></Carousel> */}
       </div>
       <div className={styles.recommended}>
         <div className={styles.recommendedHead}>Recommended</div>
         <div className={styles.recommendedGrid}>
           {recommended.map((item) => {
             return (
-              <div
+              <Link
+                to={`/trips/${item.id}`}
                 className={styles.recommendedImg}
                 key={item.id}
                 onClick={() => {
-                  navigate(`/trips/${item.id}`);
                   window.scrollTo({
                     top: 0,
                     left: 0,
@@ -124,7 +192,7 @@ const Main = () => {
               >
                 <img src={item.image} alt="" />
                 <div className={styles.recommendedTxt}>{item.location}</div>
-              </div>
+              </Link>
             );
           })}
         </div>

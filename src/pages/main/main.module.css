@@ -3,36 +3,38 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .header {
   width: 100%;
-  height: 60vh;
+  min-height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(rgba(208, 203, 255, 1), rgba(208, 203, 255, 0));
 
-  padding: 80px 0;
+  padding: 10% 0;
 }
 .headerSide {
-  width: 40vw;
+  width: 40%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-
   text-align: left;
 }
 .headerSideTitle {
+  height: 100%;
   font-family: 'Satoshi', sans-serif;
   font-weight: 700;
-  font-size: 96px;
+  font-size: clamp(48px, 6vw, 96px);
 }
 .headerSideDescription {
   width: 25vw;
   font-family: 'Satoshi', sans-serif;
   font-weight: 400;
-  font-size: 24px;
+  /* font-size: 24px; */
+  font-size: clamp(16px, 2vw, 24px);
   margin: 48px 0;
 }
 .headerBtn {
@@ -53,12 +55,13 @@
   cursor: pointer;
 }
 .headerLogo {
-  width: 445px;
-  height: 350px;
+  /* width: 445px;
+  height: 350px; */
+  width: 40%;
 }
 
 .discover {
-  width: 1272px;
+  width: 80%;
 }
 .discoverHead {
   padding: 20px;
@@ -68,7 +71,7 @@
 .discoverHeadTxt {
   font-family: 'Satoshi', sans-serif;
   font-weight: 700;
-  font-size: 48px;
+  font-size: clamp(36px, 4vw, 48px);
 }
 .discoverNavigate {
   padding: 20px;
@@ -81,7 +84,8 @@
   height: 49px;
   font-family: 'Satoshi', sans-serif;
   font-weight: 400;
-  font-size: 24px;
+  /* font-size: 24px; */
+  font-size: clamp(18px, 2.5vw, 24px);
   color: rgba(20, 20, 20, 1);
   background-color: rgba(20, 20, 20, 0);
   border: none;
@@ -91,7 +95,7 @@
   height: 49px;
   font-family: 'Satoshi', sans-serif;
   font-weight: 700;
-  font-size: 24px;
+  font-size: clamp(18px, 2.5vw, 24px);
   color: rgba(106, 98, 183, 1);
   background-color: rgba(20, 20, 20, 0);
   border: none;
@@ -102,31 +106,85 @@
   cursor: pointer;
 }
 .discoverArrows {
-  width: 130px;
+  width: clamp(80px, 18vw, 130px);
+  /* width: 130px; */
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .discoverArrow {
-  width: 56px;
-  height: 56px;
+  width: clamp(32px, 8vw, 56px);
+  height: clamp(32px, 8vw, 56px);
   border: 1px solid rgba(136, 136, 136, 1);
   border-radius: 100px;
   background-color: rgba(136, 136, 136, 0);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.discoverArrowImg {
+  width: 60%;
 }
 
+.swiperContainer {
+  width: 80vw;
+}
+.discoverItemWrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.discoverItem {
+  display: flex;
+  width: 384px;
+  height: 290px;
+  border: none;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+.discoverItemImg {
+  width: 100%;
+  object-fit: contain;
+  position: relative;
+}
+.discoverItemTxt {
+  position: absolute;
+  bottom: 0;
+  width: 344px;
+  height: 51px;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 0 20px;
+}
+.recommended {
+  width: 80%;
+}
 .recommendedHead {
   font-family: 'Satoshi', sans-serif;
   font-weight: 700;
-  font-size: 48px;
+  font-size: clamp(36px, 4vw, 48px);
   text-align: start;
   padding: 40px 0;
 }
 .recommendedGrid {
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 35px;
-  padding: 0 0 70px 0;
+  justify-content: space-around;
+  /* justify-content: center; */
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, 282px);
+  grid-gap: 32px;
 }
 .recommendedImg {
   overflow: hidden;
@@ -140,7 +198,6 @@
 div .recommendedTxt {
   position: absolute;
   bottom: 0;
-  /* top: 250px; */
   left: 0;
   width: 100%;
   height: 51px;

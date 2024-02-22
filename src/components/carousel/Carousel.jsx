@@ -1,7 +1,7 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import styles from './carousel.module.css';
 const Carousel = ({ offset, discover }) => {
-  const navigate = useNavigate();
   return (
     <div>
       <div className={styles.mainContainer}>
@@ -13,11 +13,11 @@ const Carousel = ({ offset, discover }) => {
             }}
           >
             {discover.map((item) => (
-              <div
+              <Link
+                to={`/trips/${item.id}`}
                 className={styles.item}
                 key={item.id}
                 onClick={() => {
-                  navigate(`/trips/${item.id}`);
                   window.scrollTo({
                     top: 0,
                     left: 0,
@@ -27,7 +27,7 @@ const Carousel = ({ offset, discover }) => {
               >
                 <img src={item.image} alt="" />
                 <div className={styles.itemTxt}>{item.location}</div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

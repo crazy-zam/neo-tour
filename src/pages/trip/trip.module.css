@@ -15,24 +15,29 @@
 
 .headerBtn {
   position: absolute;
-  top: 150px;
-  left: 150px;
+  top: 5vw;
+  left: 10vw;
   background-color: rgba(0, 0, 0, 0);
   border: none;
   color: white;
   cursor: pointer;
   font-weight: 400;
-  font-size: 28px;
-  width: 200px;
+  font-size: clamp(14px, 2vw, 24px);
+  /* font-size: 28px; */
+  /* width: 200px; */
+  width: clamp(100px, 15vw, 200px);
   height: 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
+.headerBtnImg {
+  width: 30%;
+}
 .body {
   position: absolute;
   width: 100%;
+  top: 45vh;
   height: max(max-content, 50vh);
   border: none;
   border-radius: 48px 48px 0 0;
@@ -44,7 +49,7 @@
 .bodyTitle {
   margin: 50px 0 20px;
   font-weight: 900;
-  font-size: 64px;
+  font-size: clamp(36px, 6vw, 64px);
   width: 80vw;
   text-align: start;
 }
@@ -101,7 +106,7 @@
 
 .bookBtn {
   width: min(1200px, 60vw);
-  height: 40px;
+  height: 64px;
   background-color: rgba(106, 98, 183, 1);
   border: none;
   border-radius: 50px;

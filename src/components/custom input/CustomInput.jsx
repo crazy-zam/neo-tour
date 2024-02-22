@@ -26,8 +26,6 @@ const CustomInput = ({ mask, placeholder, phone, setPhone }) => {
   const onKeyDown = (event) => {
     const index = +event.target.dataset.index;
     const value = event.key;
-    //  const type = event.nativeEvent.inputType;
-
     if (value === 'Backspace') {
       if (event.target.value === '') {
         if (index > 0) {

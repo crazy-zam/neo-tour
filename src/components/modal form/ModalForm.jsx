@@ -1,12 +1,14 @@
+import { useState } from 'react';
 import styles from './modalForm.module.css';
-import closeBtn from './../../assets/closeBtn.svg';
-import personIcon from './../../assets/person icon.svg';
-import { useEffect, useState } from 'react';
-import CustomInput from './CustomInput';
-import flagRU from './../../assets/ru flag.svg';
-import flagKZ from './../../assets/kz flag.svg';
-import flagKG from './../../assets/kg flag.svg';
-import arrowDown from './../../assets/arrow down.svg';
+import CustomInput from '../custom input/CustomInput';
+import {
+  closeBtn,
+  personIcon,
+  flagRU,
+  flagKZ,
+  flagKG,
+  arrowDown,
+} from './../../assets/index';
 
 const ModalForm = ({ setModal }) => {
   const [peopleCount, setPeopleCount] = useState(1);

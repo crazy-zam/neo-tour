@@ -1,16 +1,17 @@
 import styles from './trip.module.css';
-import { detailed, reviews } from './../../helpers/rest';
+import { detailed, reviews } from '../../helpers/rest';
 import arrBack from './../../assets/arrow back.svg';
 import locationPoint from './../../assets/location point.svg';
-import ModalForm from '../UI/ModalForm';
-import ModalStatus from '../UI/ModalStatus';
-import { useNavigate } from 'react-router-dom';
+import ModalForm from '../../components/modal form/ModalForm';
+import ModalStatus from '../../components/modal status/ModalStatus';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
+
 const Trip = () => {
-  const id = window.location.pathname.split('/').pop();
+  const { id } = useParams();
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
-  console.log(!!modal && modal !== 'book');
+
   return (
     <div className={styles.page}>
       <div className={styles.header}>
@@ -26,7 +27,7 @@ const Trip = () => {
             });
           }}
         >
-          <img src={arrBack} alt="Go back" />
+          <img src={arrBack} alt="Go back" className={styles.headerBtnImg} />
           Go back
         </button>
       </div>

@@ -5,17 +5,28 @@ import locationPoint from './../../assets/location point.svg';
 import ModalForm from '../../components/modal form/ModalForm';
 import ModalStatus from '../../components/modal status/ModalStatus';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getTourbyId } from '../../api/api';
 
 const Trip = () => {
   const { id } = useParams();
+  const [tour, setTour] = useState({});
+  useEffect(() => {
+    async function fetchData() {
+      const tour = await getTourbyId(id);
+      setTour(tour);
+    }
+    fetchData();
+  }, []);
+
+  // console.log(tour);
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
 
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <img src={detailed[id].image} alt="" className={styles.headerImg} />
+        <img src={tour.image} alt="" className={styles.headerImg} />
         <button
           className={styles.headerBtn}
           onClick={() => {
@@ -32,14 +43,14 @@ const Trip = () => {
         </button>
       </div>
       <div className={styles.body}>
-        <div className={styles.bodyTitle}>{detailed[id].title}</div>
+        <div className={styles.bodyTitle}>{tour.title}</div>
         <div className={styles.location}>
           <img src={locationPoint} alt="" />
-          {detailed[id].location}
+          {tour.tourLocation}
         </div>
         <div className={styles.bodyDescription}>
           <div className={styles.bodyDescriptionLabel}>Description</div>
-          {detailed[id].description}
+          {tour.description}
         </div>
         <div className={styles.reviews}>
           <div className={styles.reviewsTitle}>Reviews</div>

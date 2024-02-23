@@ -19,7 +19,8 @@ const Main = () => {
   const [activeTabTours, setActiveTabTours] = useState([]);
   useEffect(() => {
     async function fetch() {
-      const tours = getDiscoverTours(tabs.indexOf(activeTab) + 1);
+      const tours = await getDiscoverTours(tabs.indexOf(activeTab) + 1);
+      console.log(tours);
       setActiveTabTours(tours);
     }
     fetch();
@@ -144,9 +145,7 @@ const Main = () => {
                       alt=""
                       className={styles.discoverItemImg}
                     />
-                    <div className={styles.discoverItemTxt}>
-                      {item.location}
-                    </div>
+                    <div className={styles.discoverItemTxt}>{item.title}</div>
                   </Link>
                 </div>
               </SwiperSlide>

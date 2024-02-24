@@ -16,7 +16,7 @@ const Trip = () => {
     }
     fetchData();
   }, []);
-
+  console.log(tour);
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
 
@@ -49,7 +49,7 @@ const Trip = () => {
             <div className={styles.bodyTitle}>{tour.title}</div>
             <div className={styles.location}>
               <img src={locationPoint} alt="" />
-              {tour.tourLocation}
+              {tour.location}
             </div>
             <div className={styles.bodyDescription}>
               <div className={styles.bodyDescriptionLabel}>Description</div>

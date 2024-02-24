@@ -6,8 +6,18 @@ import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { getRecommendTours, getDiscoverTours } from '../../api/api';
+const srollTopHandler = () => {
+  setTimeout(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }, 1000);
+};
 const Main = () => {
   const swiperRef = useRef();
+  const headerRef = useRef();
   const tabs = ['Popular', 'Featured', 'Most Visited', 'Europe', 'Asia'];
   const [activeTab, setActiveTab] = useState('Popular');
   const [activeTabTours, setActiveTabTours] = useState([]);
@@ -32,7 +42,7 @@ const Main = () => {
 
   return (
     <div className={styles.main}>
-      <div className={styles.header}>
+      <div className={styles.header} ref={headerRef}>
         <div className={styles.headerSide}>
           <div className={styles.headerSideTitle}>Winter Vacation Trips</div>
           <div className={styles.headerSideDescription}>
@@ -41,13 +51,13 @@ const Main = () => {
           </div>
           <button
             className={styles.headerBtn}
-            onClick={() =>
+            onClick={() => {
               window.scrollTo({
-                top: 700,
+                top: headerRef.current.scrollHeight,
                 left: 0,
                 behavior: 'smooth',
-              })
-            }
+              });
+            }}
           >
             <div>Let’s Go!</div>
             <img src={arrow} alt="" />
@@ -130,13 +140,7 @@ const Main = () => {
                   <Link
                     className={styles.discoverItem}
                     to={`/trips/${item.id}`}
-                    onClick={() => {
-                      window.scrollTo({
-                        top: 0,
-                        left: 0,
-                        behavior: 'smooth',
-                      });
-                    }}
+                    onClick={srollTopHandler}
                   >
                     <img
                       src={item.image}
@@ -162,13 +166,7 @@ const Main = () => {
                 to={`/trips/${item.id}`}
                 className={styles.recommendedItem}
                 key={item.id}
-                onClick={() => {
-                  window.scrollTo({
-                    top: 0,
-                    left: 0,
-                    behavior: 'smooth',
-                  });
-                }}
+                onClick={srollTopHandler}
               >
                 <img
                   src={item.image}

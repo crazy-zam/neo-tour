@@ -114,7 +114,7 @@ const ModalForm = ({ setModal }) => {
         <div className={styles.helper}>Commentaries to trip</div>
         <input
           className={styles.commentaries}
-          autocomplete="off"
+          autoComplete="off"
           type="text"
           name="commentaries"
           placeholder="Write your wishes to trip..."

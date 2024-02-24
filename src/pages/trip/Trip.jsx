@@ -16,7 +16,6 @@ const Trip = () => {
     }
     fetchData();
   }, []);
-  console.log(tour);
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
 

@@ -1,11 +1,5 @@
 import { logo, arrow, arrowLeft, arrowRigth, dot } from './../../assets/index';
 import styles from './main.module.css';
-
-import {
-  recommended,
-  discoverPopular,
-  discoverFuture,
-} from '../../helpers/rest';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useRef } from 'react';
@@ -17,21 +11,25 @@ const Main = () => {
   const tabs = ['Popular', 'Featured', 'Most Visited', 'Europe', 'Asia'];
   const [activeTab, setActiveTab] = useState('Popular');
   const [activeTabTours, setActiveTabTours] = useState([]);
+  const [recommended, setRecommended] = useState([]);
   useEffect(() => {
     async function fetch() {
       const tours = await getDiscoverTours(tabs.indexOf(activeTab) + 1);
-      console.log(tours);
+      const recommendedTours = await getRecommendTours();
       setActiveTabTours(tours);
+      setRecommended(recommendedTours);
     }
     fetch();
   }, []);
-  // useEffect(() => {
-  //   async function fetch() {
-  //     const tours = getDiscoverTours(tabs.indexOf(activeTab));
-  //     setActiveTabTours(tours);
-  //   }
-  //   fetch();
-  // }, [activeTab]);
+  useEffect(() => {
+    async function fetch() {
+      const tours = await getDiscoverTours(tabs.indexOf(activeTab) + 1);
+      setActiveTabTours(tours);
+      swiperRef.current.slideTo(0, 1000);
+    }
+    fetch();
+  }, [activeTab]);
+
   return (
     <div className={styles.main}>
       <div className={styles.header}>
@@ -89,7 +87,7 @@ const Main = () => {
               <div key={tab}>
                 <button
                   className={
-                    tab == activeTab
+                    tab === activeTab
                       ? styles.discoverNavigateActiveBtn
                       : styles.discoverNavigateBtn
                   }
@@ -101,7 +99,7 @@ const Main = () => {
                 >
                   {tab}
                 </button>
-                {tab == activeTab && <img src={dot} alt="" />}
+                {tab === activeTab && <img src={dot} alt="" />}
               </div>
             );
           })}
@@ -145,20 +143,15 @@ const Main = () => {
                       alt=""
                       className={styles.discoverItemImg}
                     />
-                    <div className={styles.discoverItemTxt}>{item.title}</div>
+                    <div className={styles.discoverItemTxt}>
+                      {item.location}
+                    </div>
                   </Link>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
-
-        {/* <Carousel
-          className={styles.discoverCarousel}
-          pageWidth={PAGE_WIDTH}
-          offset={offset}
-          discover={activeTab == 'Popular' ? discoverPopular : discoverFuture}
-        ></Carousel> */}
       </div>
       <div className={styles.recommended}>
         <div className={styles.recommendedHead}>Recommended</div>
@@ -167,7 +160,7 @@ const Main = () => {
             return (
               <Link
                 to={`/trips/${item.id}`}
-                className={styles.recommendedImg}
+                className={styles.recommendedItem}
                 key={item.id}
                 onClick={() => {
                   window.scrollTo({
@@ -177,14 +170,18 @@ const Main = () => {
                   });
                 }}
               >
-                <img src={item.image} alt="" />
+                <img
+                  src={item.image}
+                  alt=""
+                  className={styles.recommendedImg}
+                />
                 <div className={styles.recommendedTxt}>{item.location}</div>
               </Link>
             );
           })}
         </div>
       </div>
-      <Link to={'/admin'}>admin panel</Link>
+      {/* <Link to={'/admin'}>admin panel</Link> */}
     </div>
   );
 };

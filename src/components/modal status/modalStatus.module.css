@@ -14,7 +14,7 @@
 
 .form {
   width: 620px;
-  height: 250px;
+  /* height: 250px; */
   background-color: white;
   border-radius: 48px;
   display: flex;

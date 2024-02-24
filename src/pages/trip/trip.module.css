@@ -17,19 +17,19 @@
   position: absolute;
   top: 5vw;
   left: 10vw;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.1);
   border: none;
+  border-radius: 25px;
   color: white;
   cursor: pointer;
   font-weight: 400;
   font-size: clamp(14px, 2vw, 24px);
-  /* font-size: 28px; */
-  /* width: 200px; */
   width: clamp(100px, 15vw, 200px);
   height: 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 15px;
 }
 .headerBtnImg {
   width: 30%;

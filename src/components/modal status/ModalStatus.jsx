@@ -1,6 +1,7 @@
 import styles from './modalStatus.module.css';
 
 const ModalStatus = ({ message, setModal }) => {
+  console.log(message);
   return (
     <div
       className={styles.background}

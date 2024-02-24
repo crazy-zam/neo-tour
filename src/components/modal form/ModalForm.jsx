@@ -155,8 +155,9 @@ const ModalForm = ({ setModal }) => {
             )
           }
           onClick={() => {
-            // setModal('Your Trip has been booked!');
-            console.log(phoneParser());
+            setModal(
+              `Your Trip has been booked! We will call you by phone: ${phoneParser()}`,
+            );
           }}
         >
           Submit

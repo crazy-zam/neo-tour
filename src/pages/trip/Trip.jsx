@@ -7,8 +7,11 @@ import { useEffect, useState } from 'react';
 import { getTourbyId } from '../../api/api';
 
 const Trip = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [tour, setTour] = useState({});
+  const [modal, setModal] = useState(false);
+
   useEffect(() => {
     async function fetchData() {
       const tour = await getTourbyId(id);
@@ -16,8 +19,6 @@ const Trip = () => {
     }
     fetchData();
   }, []);
-  const navigate = useNavigate();
-  const [modal, setModal] = useState(false);
 
   return (
     <div className={styles.page}>
@@ -76,7 +77,9 @@ const Trip = () => {
           </div>
         </div>
       )}
-      {modal === 'book' && <ModalForm setModal={setModal}></ModalForm>}
+      {modal === 'book' && (
+        <ModalForm setModal={setModal} tourId={id}></ModalForm>
+      )}
       {!!modal && modal !== 'book' && (
         <ModalStatus message={modal} setModal={setModal}></ModalStatus>
       )}

@@ -58,9 +58,8 @@ const FormAddTour = () => {
         }`;
           formData.append('request', json);
           formData.append('file', file, file.name);
-          // console.log(json);
+          console.log(json);
           await addTour(formData, headers);
-
           actions.setSubmitting(false);
         }}
       >

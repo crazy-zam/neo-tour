@@ -48,7 +48,7 @@ export const bookTour = async (id, phone, countOfPeople, comments) => {
     const response = await axios.post(`${API}/api/v1/tour/booking`, formData, {
       headers: headers,
     });
-    return response;
+    return response.data;
   } catch (error) {
     console.log(error);
   }

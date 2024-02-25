@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './modalForm.module.css';
 import CustomInput from '../custom input/CustomInput';
 import {
@@ -9,20 +9,34 @@ import {
   flagKG,
   arrowDown,
 } from './../../assets/index';
+import { bookTour } from '../../api/api';
 
-const ModalForm = ({ setModal }) => {
+const ModalForm = ({ setModal, tourId }) => {
   const [peopleCount, setPeopleCount] = useState(1);
   const [commentaries, setCommentaries] = useState('');
   const [phone, setPhone] = useState([]);
+  const [disabledBtn, setDisabledBtn] = useState(true);
+  const [selectFlag, setSelectFlag] = useState({
+    select: false,
+    selected: 'KZ',
+  });
+
+  useEffect(() => {
+    setDisabledBtn(
+      !commentaries ||
+        !phone.reduce(
+          (acc, val) => (val.type == 'input' ? acc && !!val.value : acc),
+          true,
+        ),
+    );
+  }, [commentaries, phone]);
+
   const masks = {
     RU: { prefix: '7', mask: '999 999 9999', flag: flagRU },
     KZ: { prefix: '7', mask: '999 999 9999', flag: flagKZ },
     KG: { prefix: '996', mask: '999 999 999', flag: flagKG },
   };
-  const [selectFlag, setSelectFlag] = useState({
-    select: false,
-    selected: 'KZ',
-  });
+
   const phoneParser = () => {
     let res = '';
     res = res.concat(masks[selectFlag.selected].prefix);
@@ -31,19 +45,33 @@ const ModalForm = ({ setModal }) => {
     });
     return res;
   };
+  const bookHandler = async () => {
+    const bookTourMsg = await bookTour(
+      tourId,
+      phoneParser(),
+      peopleCount,
+      commentaries,
+    );
+    setModal(bookTourMsg);
+  };
+  const increasePeopleCountHandler = () => {
+    peopleCount > 1 && setPeopleCount((current) => current - 1);
+  };
+  const decreasePeopleCountHandler = () => {
+    peopleCount < 6 && setPeopleCount((current) => current + 1);
+  };
+  const closeWindowHandler = () => setModal(false);
+  const closeWindowBackgroundHandler = (event) => {
+    if (event.target.className.includes('background')) setModal(false);
+  };
   return (
-    <div
-      className={styles.background}
-      onClick={(event) => {
-        if (event.target.className.includes('background')) setModal(false);
-      }}
-    >
+    <div className={styles.background} onClick={closeWindowBackgroundHandler}>
       <div className={styles.form}>
         <div className={styles.header}>
           <div className={styles.headerInfo}>Info</div>
           <button
             className={styles.headerCloseBtn}
-            onClick={() => setModal(false)}
+            onClick={closeWindowHandler}
           >
             <img src={closeBtn} alt="" />
           </button>
@@ -126,18 +154,14 @@ const ModalForm = ({ setModal }) => {
           <div className={styles.peopleCountBtnGroup}>
             <button
               className={styles.peopleCountBtn}
-              onClick={() =>
-                peopleCount > 1 && setPeopleCount((current) => current - 1)
-              }
+              onClick={increasePeopleCountHandler}
             >
               -
             </button>
             <div>{peopleCount}</div>
             <button
               className={styles.peopleCountBtn}
-              onClick={() =>
-                peopleCount < 6 && setPeopleCount((current) => current + 1)
-              }
+              onClick={decreasePeopleCountHandler}
             >
               +
             </button>
@@ -147,18 +171,8 @@ const ModalForm = ({ setModal }) => {
         </div>
         <button
           className={styles.submitBtn}
-          disabled={
-            !commentaries ||
-            !phone.reduce(
-              (acc, val) => (val.type == 'input' ? acc && !!val.value : acc),
-              true,
-            )
-          }
-          onClick={() => {
-            setModal(
-              `Your Trip has been booked! We will call you by phone: ${phoneParser()}`,
-            );
-          }}
+          disabled={disabledBtn}
+          onClick={bookHandler}
         >
           Submit
         </button>

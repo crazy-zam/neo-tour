@@ -13,8 +13,7 @@ function App() {
         <Routes>
           <Route path="trips/:id" element={<Trip />} />
           <Route path="admin" element={<Admin />} />
-          {/* <Route path="*" element={<Main />} /> */}
-          <Route path="*" element={<Admin />} />
+          <Route path="*" element={<Main />} />
         </Routes>
       </div>
     </BrowserRouter>

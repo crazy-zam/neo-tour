@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Formik } from 'formik';
 const API = 'https://devilish-badge-production.up.railway.app';
 const headers = {
-  'Content-Type': 'multipart/form-data',
+  'Content-Type': 'application/json',
 };
 export const addCategory = async (data, head) => {
   try {

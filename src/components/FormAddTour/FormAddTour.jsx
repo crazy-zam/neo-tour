@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import axios from 'axios';
 
-const API = 'https://http://134.209.229.107:8080';
+const API = 'https://devilish-badge-production.up.railway.app';
 
 const headers = {
   'Content-Type': 'multipart/form-data',
@@ -10,7 +10,7 @@ const headers = {
 export const addTour = async (data, head) => {
   try {
     const response = await axios.post(`${API}/api/v1/admin/tour`, data, {
-      headers: headers,
+      headers: head,
     });
     console.log(response);
     return response;

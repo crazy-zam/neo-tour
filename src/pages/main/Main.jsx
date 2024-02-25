@@ -65,7 +65,9 @@ const Main = () => {
         </div>
         <img src={logo} alt="traveler" className={styles.headerLogo} />
       </div>
+
       <div className={styles.discover}>
+        <Link to={'/admin'}>admin panel</Link>
         <div className={styles.discoverHead}>
           <div className={styles.discoverHeadTxt}>Discover</div>
           <div className={styles.discoverArrows}>
@@ -179,7 +181,6 @@ const Main = () => {
           })}
         </div>
       </div>
-      {/* <Link to={'/admin'}>admin panel</Link> */}
     </div>
   );
 };

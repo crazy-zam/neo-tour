@@ -1,9 +1,10 @@
 import axios from 'axios';
-const API = 'https://e63d4bfd940d800e.mokky.dev';
+// const API = 'https://e63d4bfd940d800e.mokky.dev';
+const API = 'https://devilish-badge-production.up.railway.app';
 
 export const getRecommendTours = async () => {
   try {
-    const response = await axios.get(`${API}/recommended`);
+    const response = await axios.get(`${API}/api/v1/tour/recommended`);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -19,7 +20,7 @@ export const getDiscoverTours = async (id) => {
       4: 'europe',
       5: 'asia',
     };
-    const response = await axios.get(`${API}/${obj[id]}`);
+    const response = await axios.get(`${API}/api/v1/tour/bycategory/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -27,7 +28,7 @@ export const getDiscoverTours = async (id) => {
 };
 export const getTourbyId = async (id) => {
   try {
-    const response = await axios.get(`${API}/description`);
+    const response = await axios.get(`${API}/api/v1/tour/${id}`);
     return response.data[0];
   } catch (error) {
     console.log(error);

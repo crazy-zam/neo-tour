@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/neo-tour/static/css/main.5b2e0022.css",
-    "main.js": "/neo-tour/static/js/main.f42cd9e2.js",
+    "main.js": "/neo-tour/static/js/main.04515d7a.js",
     "static/media/kz flag.svg": "/neo-tour/static/media/kz flag.e26c6d79935a86438ae822d296925a47.svg",
     "static/media/main logo.png": "/neo-tour/static/media/main logo.aa1f98e8a98ad48f2348.png",
     "static/media/kg flag.svg": "/neo-tour/static/media/kg flag.6d3aba980e64eed585b445a8f4b95ddc.svg",
@@ -16,10 +16,10 @@
     "static/media/arrow right.svg": "/neo-tour/static/media/arrow right.6f9fbf7d9a22bbc8f53b02bb3b994875.svg",
     "static/media/Arrow 1.svg": "/neo-tour/static/media/Arrow 1.9e65e691eee67c7e04d526e54b526b33.svg",
     "main.5b2e0022.css.map": "/neo-tour/static/css/main.5b2e0022.css.map",
-    "main.f42cd9e2.js.map": "/neo-tour/static/js/main.f42cd9e2.js.map"
+    "main.04515d7a.js.map": "/neo-tour/static/js/main.04515d7a.js.map"
   },
   "entrypoints": [
     "static/css/main.5b2e0022.css",
-    "static/js/main.f42cd9e2.js"
+    "static/js/main.04515d7a.js"
   ]
 }
